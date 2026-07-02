@@ -1,0 +1,190 @@
+update departments
+set manager_id=10
+where department_id=10;
+
+update employees
+set salary=52000.00
+where employee_id=5;
+
+update departments
+set department_name='Human Resources'
+where department_id=1;
+
+update departments
+set manager_id=10
+where department_id=3;
+
+update training_courses
+set start_date=to_date( '2023-11-13','yyyy-mm-dd')
+where course_id=202;
+
+delete employees
+where employee_id=8;
+
+delete departments
+where department_id=7;
+
+delete  training_courses
+where course_id=205;
+
+
+select first_name|| ' ' ||last_name Employee_name,salary
+from employees;
+
+select avg(salary)
+from employees;
+
+select department_name
+from departments;
+
+select course_name,start_date
+from training_courses;
+
+
+
+select first_name,count(course_id)
+from instructors i join training_courses t
+using(instructor_id)
+group by first_name
+
+select first_name,department_name
+from employees e NATURAl join departments
+
+ 
+
+SELECT Department_ID,
+       COUNT(*),
+       AVG(Salary)
+FROM Employees
+GROUP BY Department_ID;
+
+
+
+SELECT First_Name || ' ' || Last_Name Instructor_Name,
+       Course_Name
+FROM Instructors i
+JOIN Training_Courses t
+ON i.Instructor_ID = t.Instructor_ID;
+
+
+
+SELECT First_Name || ' ' || Last_Name Employee_Name,
+       Department_Name,
+       (SELECT AVG(Salary)
+        FROM Employees
+        WHERE Department_ID = e.Department_ID) Average_Salary
+FROM Employees e
+JOIN Departments d
+ON e.Department_ID = d.Department_ID;
+
+
+
+SELECT Employee_ID,
+       Status,
+       COUNT(*)
+FROM Leave_Requests
+WHERE Status IN ('Approve', 'Rejected')
+GROUP BY Employee_ID, Status;
+
+
+
+SELECT Department_ID,
+       COUNT(*)
+FROM Employees
+GROUP BY Department_ID;
+
+
+
+SELECT First_Name || ' ' || Last_Name Instructor_Name,
+       COUNT(Course_ID)
+FROM Instructors i
+JOIN Training_Courses t
+ON i.Instructor_ID = t.Instructor_ID
+GROUP BY First_Name, Last_Name;
+
+
+
+SELECT First_Name || ' ' || Last_Name Employee_Name,
+       Department_Name
+FROM Employees e
+JOIN Departments d
+ON e.Department_ID = d.Department_ID;
+
+
+SELECT First_Name || ' ' || Last_Name Employee_Name
+FROM Employees
+WHERE Department_ID IN
+(
+    SELECT Department_ID
+    FROM Employees
+    GROUP BY Department_ID
+    HAVING COUNT(*) > 3
+);
+
+
+
+SELECT Course_Name
+FROM Training_Courses t
+JOIN Instructors i
+ON t.Instructor_ID = i.Instructor_ID
+WHERE First_Name = 'Sarah'
+AND Last_Name = 'Johnson';
+
+
+
+SELECT *
+FROM Employees e
+JOIN Departments d
+ON e.Department_ID = d.Department_ID
+WHERE Manager_ID IS NULL;
+
+
+
+SELECT Department_Name,
+       SUM(Salary)
+FROM Employees e
+JOIN Departments d
+ON e.Department_ID = d.Department_ID
+GROUP BY Department_Name;
+
+
+
+SELECT First_Name || ' ' || Last_Name Employee_Name,
+       Department_Name,
+       Salary
+FROM Employees e
+JOIN Departments d
+ON e.Department_ID = d.Department_ID
+WHERE Salary =
+(
+    SELECT MAX(Salary)
+    FROM Employees
+    WHERE Department_ID = e.Department_ID
+);
+
+
+
+SELECT COUNT(*)
+FROM Training_Courses
+WHERE Start_Date > TO_DATE('2023-12-01', 'YYYY-MM-DD');
+
+
+
+SELECT First_Name || ' ' || Last_Name Employee_Name,
+       Department_ID,
+       Salary
+FROM Employees e
+WHERE Salary =
+(
+    SELECT MAX(Salary)
+    FROM Employees
+    WHERE Department_ID = e.Department_ID
+);
+
+
+
+
+
+
+
+
